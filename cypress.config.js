@@ -29,6 +29,8 @@ module.exports = defineConfig({
     supportFile: "cypress/support/e2e.js",
     setupNodeEvents,
     baseUrl: "https://cloudjam.netlify.app/",
-    downloadsFolder: 'cypress/downloads'
+    downloadsFolder: 'cypress/downloads',
+    video: false,
+    screenshotOnRunFailure: true
   },
 }); 
