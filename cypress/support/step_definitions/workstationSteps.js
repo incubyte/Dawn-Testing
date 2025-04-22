@@ -1,4 +1,4 @@
-import { Then } from '@badeball/cypress-cucumber-preprocessor';
+import { Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import WorkstationPage from '../../pages/WorkstationPage';
 
 Then('I should see transport controls', () => {
@@ -64,4 +64,27 @@ Then('the default track should have basic controls', (dataTable) => {
     dataTable.hashes().forEach(row => {
         WorkstationPage.verifyTrackControl(row.control);
     });
+});
+
+When('I click the Add Track button', () => {
+    WorkstationPage.clickAddTrack();
+});
+
+When('I delete track {int}', (trackNumber) => {
+    cy.contains('.track-name', `Track ${trackNumber}`)
+        .parents('.track')
+        .find('.delete-track-btn')
+        .click();
+});
+
+Then('I should see {int} tracks', (expectedCount) => {
+    WorkstationPage.getTrackCount().should('eq', expectedCount);
+});
+
+Then('I should see track {int}', (trackNumber) => {
+    WorkstationPage.verifyTrackExists(trackNumber);
+});
+
+Then('I should not see track {int}', (trackNumber) => {
+    WorkstationPage.verifyTrackNotExists(trackNumber);
 });

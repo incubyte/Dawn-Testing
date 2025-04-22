@@ -45,7 +45,10 @@ class WorkstationPage extends BasePage {
                     solo: () => cy.get('.solo-button'),
                     effects: () => cy.get('.effects-button'),
                     volume: () => cy.get('.gain-slider')
-                }
+                },
+                trackList: () => cy.get('.track'),
+                deleteTrackButton: (trackId) => cy.get(`[data-track-id="${trackId}"] .delete-track-btn`),
+                trackName: (trackId) => cy.get(`[data-track-id="${trackId}"] .track-name`)
             }
         };
     }
@@ -95,6 +98,30 @@ class WorkstationPage extends BasePage {
             'volume': this.locator.tracks.trackControls.volume
         };
         this.verifyElementVisible(controlMap[control.toLowerCase()]);
+    }
+
+    clickAddTrack() {
+        this.locator.tracks.addTrack().click();
+    }
+
+    deleteTrack(trackId) {
+        this.locator.tracks.deleteTrackButton(trackId).click();
+    }
+
+    getTrackCount() {
+        return this.locator.tracks.trackList().its('length');
+    }
+
+    getTrackIds() {
+        return this.locator.tracks.trackList().invoke('attr', 'data-track-id');
+    }
+
+    verifyTrackExists(trackNumber) {
+        this.locator.tracks.trackList().contains(`.track-name`, `Track ${trackNumber}`).should('exist');
+    }
+
+    verifyTrackNotExists(trackNumber) {
+        this.locator.tracks.trackList().contains(`.track-name`, `Track ${trackNumber}`).should('not.exist');
     }
 }
 

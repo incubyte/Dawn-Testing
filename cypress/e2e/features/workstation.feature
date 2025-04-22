@@ -52,3 +52,22 @@ Feature: Workstation Page
       | Solo     |
       | Effects  |
       | Volume   |
+
+  Scenario: Add new tracks
+    When I click the Add Track button
+    Then I should see 2 tracks
+    When I click the Add Track button
+    Then I should see 3 tracks
+    And I should see track 1
+    And I should see track 2
+    And I should see track 3
+
+  Scenario: Delete a track and verify track numbering
+    When I click the Add Track button
+    And I click the Add Track button
+    Then I should see 3 tracks
+    When I delete track 2
+    Then I should see 2 tracks
+    And I should see track 1
+    And I should see track 3
+    And I should not see track 2
