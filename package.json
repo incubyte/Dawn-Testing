@@ -1,0 +1,26 @@
+{
+  "name": "dawn-testing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run",
+    "test:open": "cypress open",
+    "allure:clean": "rm -rf allure-results/* allure-report/*",
+    "allure:generate": "allure generate allure-results --clean",
+    "allure:open": "allure open allure-report",
+    "test:allure": "npm run allure:clean && cypress run && npm run allure:generate && npm run allure:open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^22.0.1",
+    "@cypress/webpack-preprocessor": "^6.0.4",
+    "@shelex/cypress-allure-plugin": "^2.41.0",
+    "allure-cypress": "^3.2.1",
+    "cypress": "^14.3.1",
+    "fs-extra": "^11.3.0",
+    "path": "^0.12.7"
+  }
+}
